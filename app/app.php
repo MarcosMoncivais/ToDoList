@@ -15,7 +15,7 @@
 
         $all_tasks = Task::getAll();
 
-        if (!empty(all_tasks)) {
+        if (!empty($all_tasks)) {
             $output = $output . "
             <h1>To Do List</h1>
             <p>Here are all your tasks:</p>
@@ -29,7 +29,7 @@
         $output = $output . "
             <form action='/tasks'method='post'>
                 <label for='description'>Task Description</label>
-                <input id='description' name='description type='text'>
+                <input id='description' name='description' type='text'>
 
                 <button type- 'submit'>Add task</button>
             </form>
@@ -38,7 +38,7 @@
         return $output;
     });
 
-    $app->post("/task", function() {
+    $app->post("/tasks", function() {
         $task = new Task($_POST['description']);
         $task->save();
         return "
