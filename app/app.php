@@ -9,7 +9,11 @@
 
     $app = new Silex\Application();
 
-    $app->get("/", function() {
+    $app->register(new Silex\Provider\twigServiveProvider(), array(
+        'twig.path' =>__DIR__'./../views'
+    ));
+
+    $app->get("/", function() use ($app) {
 
         $output = "";
 
@@ -41,7 +45,7 @@
             </form>
             ";
 
-        return $output;
+        return $app['twig']->render('tasks.php');
     });
 
     $app->post("/tasks", function() {
@@ -61,7 +65,7 @@
         return "
         <h1>List Cleared!</h1>
         <p><a href='/''>Home</a></p>
-        ";        
+        ";
     });
 
     return $app;
