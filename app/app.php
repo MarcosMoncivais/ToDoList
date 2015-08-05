@@ -13,9 +13,18 @@
 
         $output = "";
 
-        foreach (Task::getAll() as $task) {
+        $all_tasks = Task::getAll();
+
+        if (!empty(all_tasks)) {
+            $output = $output . "
+            <h1>To Do List</h1>
+            <p>Here are all your tasks:</p>
+            ";
+
+        foreach ($all_tasks as $task) {
             $output = $output . "<p>" . $task->getDescription() . "</p>";
         }
+    }
 
         $output = $output . "
             <form action='/tasks'method='post'>
@@ -27,6 +36,16 @@
         ";
 
         return $output;
+    });
+
+    $app->post("/task", function() {
+        $task = new Task($_POST['description']);
+        $task->save();
+        return "
+            <h1>You created a task!</h1>
+            <p>" . $task->getDescription() . "</p>
+            <p><a href='/'>View your list of things to do.</a></p>
+        ";
     });
 
     return $app;
