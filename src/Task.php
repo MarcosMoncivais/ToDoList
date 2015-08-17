@@ -32,12 +32,12 @@
                 $new_task = new Task($description);
                 array_push($tasks, $new_task);
             }
-            return $tasks;        
+            return $tasks;
         }
 
         static function deleteAll()
         {
-            $_SESSION['list_of_tasks'] = array();
+            $GLOBALS['DB']->exec("DELETE FROM tasks;");
         }
     }
 ?>
