@@ -17,6 +17,10 @@
     class TaskTest extends PHPUnit_Framework_TestCase
     {
 
+        protected function tearDown()
+        {Task::deleteAll();
+        }
+
         function test_save()
         {
 
