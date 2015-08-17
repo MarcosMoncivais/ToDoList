@@ -37,7 +37,7 @@
     $app->post("/tasks", function() use ($app) {
         $task = new task($_POST['description']);
         $task->save();
-        return $app['twig']->render('tasks.html.twig', array('newtask' => $task));
+        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
     });
 
     $app->post("/delete_tasks", function() use ($app) {
@@ -47,7 +47,7 @@
 
     $app->post("/categories", function() use ($app) {
         $category = new Category($_POST['name']);
-        $category->save()
+        $category->save();
         return $app ['twig']->render('categories.html.twig', array('categories' => Category::getAll()));
     });
 
